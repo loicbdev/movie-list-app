@@ -43,6 +43,7 @@ class MovieList extends Component {
         </button>
         {this.state.movies
           .filter((movie) => {
+            /* plus simple : !this.state.areOnlyRecentMoviesDisplayed || parseInt(movie.year) > 2000; */
             if (this.state.areOnlyRecentMoviesDisplayed === true) {
               return parseInt(movie.year) > 2000;
             }
