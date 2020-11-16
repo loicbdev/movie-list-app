@@ -7,7 +7,9 @@ class MovieList extends Component {
     super(props);
     this.state = {
       movies: [],
+      areOnlyRecentMoviesDisplayed: false,
     };
+    this.recentMoviesHandler = this.recentMoviesHandler.bind(this);
   }
 
   componentDidMount() {
@@ -17,7 +19,7 @@ class MovieList extends Component {
   fetchMovies() {
     axios
       .get(
-        'https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json'
+        "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
       )
       .then((response) => {
         this.setState({
@@ -26,18 +28,35 @@ class MovieList extends Component {
       });
   }
 
+  recentMoviesHandler() {
+    const displayed = this.state.areOnlyRecentMoviesDisplayed;
+    this.setState({ areOnlyRecentMoviesDisplayed: !displayed });
+  }
+
   render() {
     return (
       <div className="MovieList">
-        {this.state.movies.map((movie) => (
-          <Movie
-            /* plus simple : key={movie.id} {...movie} */
-            key={movie.id}
-            title={movie.title}
-            year={movie.year}
-            director={movie.director}
-          />
-        ))}
+        <button type="button" onClick={this.recentMoviesHandler}>
+          {this.state.areOnlyRecentMoviesDisplayed
+            ? "All movies"
+            : "Recent Movies"}
+        </button>
+        {this.state.movies
+          .filter((movie) => {
+            if (this.state.areOnlyRecentMoviesDisplayed === true) {
+              return parseInt(movie.year) > 2000;
+            }
+            return true;
+          })
+          .map((movie) => (
+            <Movie
+              /* plus simple : key={movie.id} {...movie} */
+              key={movie.id}
+              title={movie.title}
+              year={movie.year}
+              director={movie.director}
+            />
+          ))}
       </div>
     );
   }
