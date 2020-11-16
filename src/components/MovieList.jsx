@@ -1,8 +1,8 @@
-import React from 'react';
-import Movie from './components/Movie';
+import React, { Component }  from 'react';
+import Movie from './Movie';
 
 
-class MovieList extends React.Component {
+class MovieList extends Component {
 
     render() {
         return (
