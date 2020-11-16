@@ -8,6 +8,6 @@ const Movie = (props) => {
       <h2>director : {props.director}</h2>
     </div>
   );
-};
+}
 
 export default Movie;
