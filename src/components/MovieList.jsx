@@ -50,13 +50,7 @@ class MovieList extends Component {
             return true;
           })
           .map((movie) => (
-            <Movie
-              /* plus simple : key={movie.id} {...movie} */
-              key={movie.id}
-              title={movie.title}
-              year={movie.year}
-              director={movie.director}
-            />
+            <Movie key={movie.id} {...movie} />
           ))}
       </div>
     );
